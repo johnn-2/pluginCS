@@ -35,9 +35,9 @@ subprojects {
     apply(plugin = "com.lagradost.cloudstream3.gradle")
 
     cloudstream {
-        // when running through github workflow, GITHUB_REPOSITORY should contain current repository name
-        setRepo(System.getenv("GITHUB_REPOSITORY") ?: "user/repo")
-    }
+        setRepo(System.getenv("GITHUB_REPOSITORY") ?: "https://github.com/johnn-2/pluginCS")
+        authors = listOf("johnn-2")
+    }    
 
     android {
         namespace = "com.example"
