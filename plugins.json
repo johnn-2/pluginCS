@@ -2,7 +2,7 @@
   {
     "iconUrl": "https://www.google.com/s2/favicons?domain=freepornvideos.xxx&sz=%size%",
     "apiVersion": 1,
-    "repositoryUrl": "https://github.com/johnn-2/TestPlugins",
+    "repositoryUrl": "https://github.com/johnn-2/pluginCS",
     "fileSize": 12347,
     "status": 1,
     "language": "en",
@@ -15,7 +15,7 @@
     "version": 1,
     "internalName": "pornxp",
     "description": "Premium porn",
-    "url": "https://raw.githubusercontent.com/johnn-2/TestPlugins/builds/ExamplePlugin.cs3",
+    "url": "https://raw.githubusercontent.com/johnn-2/pluginCS/builds/refs/heads/ExamplePlugin.cs3",
     "name": "PornXP"
   }
 ]
