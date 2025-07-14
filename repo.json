@@ -3,6 +3,6 @@
   "description": "Extension for PXP",
   "manifestVersion": 1,
   "pluginLists": [
-    "https://raw.githubusercontent.com/johnn-2/pluginCS/refs/heads/master/plugins.json"
+    "https://raw.githubusercontent.com/johnn-2/pluginCS/builds/plugins.json"
   ]
 }
