@@ -55,7 +55,7 @@ class pornxp : MainAPI() { // All providers must be an instance of MainAPI
     }
     private fun Element.toSearchResult(): SearchResponse {
         val title = this.select("item_title").text()
-        val href = this.selectFirst("a")!!.attr("href")
+        val href = this.selectFirst("/videos/$(id)")!!.attr("href")
         val posterUrl = this.select("item_img").attr("data-src")
         return newMovieSearchResponse(title, href, TvType.Movie) {
             this.posterUrl = posterUrl
@@ -134,8 +134,8 @@ class pornxp : MainAPI() { // All providers must be an instance of MainAPI
         document.select("video source").map { res ->
             callback.invoke(
                 newExtractorLink(
-                    source = "FPV",
-                    name = "FPV",
+                    source = "pornxp",
+                    name = "pornxp",
                     url = res.attr("src"),
                     type = ExtractorLinkType.M3U8
                 ) {
