@@ -17,6 +17,8 @@ class pornxp : MainAPI() { // All providers must be an instance of MainAPI
     override val supportedTypes = setOf(TvType.NSFW)
     override val hasMainPage = true
     override var lang = "en"
+    override val vpnStatus = VPNStatus.MightBeNeeded
+     override val hasQuickSearch = false
 
     override val mainPage = mainPageOf(
         "/Released" to "New Releases",
@@ -36,7 +38,7 @@ class pornxp : MainAPI() { // All providers must be an instance of MainAPI
     // Enable this when your provider has a main page
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val document = app.get("$mainUrl/tags/${request.data}/${page+1}/").document
-        val home     = document.select("width").mapNotNull {
+        val home     = document.select(".item.preview").mapNotNull {
             it.toSearchResult()
         }
 
@@ -52,9 +54,9 @@ class pornxp : MainAPI() { // All providers must be an instance of MainAPI
         )
     }
     private fun Element.toSearchResult(): SearchResponse {
-        val title = this.select("strong.title").text()
+        val title = this.select("item_title").text()
         val href = this.selectFirst("a")!!.attr("href")
-        val posterUrl = this.select("a img").attr("data-src")
+        val posterUrl = this.select("item_img").attr("data-src")
         return newMovieSearchResponse(title, href, TvType.Movie) {
             this.posterUrl = posterUrl
         }
@@ -70,12 +72,12 @@ class pornxp : MainAPI() { // All providers must be an instance of MainAPI
     override suspend fun search(query: String): List<SearchResponse> {
         val searchResponse = mutableListOf<SearchResponse>()
 
-        for (i in 1..9) {
+        for (i in 1..5) {
             val searchquery=query.createSlug() ?:""
             val document = app.get(
                 "${mainUrl}/tags/$searchquery/")
                 .document
-            val results = document.select("#custom_list_videos_videos_list_search_result_items > div.item").mapNotNull { it.toSearchResult() }
+            val results = document.select(".item.preview > div.item").mapNotNull { it.toSearchResult() }
             searchResponse.addAll(results)
 
             if (results.isEmpty()) break
